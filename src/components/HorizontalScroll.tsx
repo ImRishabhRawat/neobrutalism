@@ -39,7 +39,7 @@ export default function HorizontalScroll({
           trigger: trigger,
           pin: true,
           scrub: 1,
-          start: "top top",
+          start: "top 10%",
           // The end determines the duration of the scroll
           // We set it to the amount we scroll to keep speed 1:1
           end: () => `+=${amountToScroll}`,

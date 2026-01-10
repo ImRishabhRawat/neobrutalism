@@ -13,7 +13,7 @@ export function useSmoothScroll() {
       smoothWheel: true,
     });
 
-    function raf(time: nuWmber) {
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }

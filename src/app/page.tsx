@@ -1,7 +1,8 @@
 import ParallaxBox from "@/components/ParallaxBox";
 import { TextAnim } from "@/components/TextAnim";
-import TextReveal from "@/components/TextReveal";
 import HorizontalScroll from "@/components/HorizontalScroll";
+import { Hero } from "@/components/Hero";
+import HomeView from "@/components/HomeView";
 
 /**
  * Home Page
@@ -13,10 +14,8 @@ export default function Home() {
   return (
     <div className="bg-neutral-900 w-full min-h-screen px-4 py-6">
       {/* Hero Section */}
-      <div className="w-full h-screen flex items-center justify-center">
-        <h1 className="text-white text-8xl font-bebas">Scroll Down</h1>
-      </div>
-
+      {/* <Hero/> */}
+<HomeView/>
       <TextAnim />
 
       {/* <TextReveal
@@ -125,9 +124,23 @@ export default function Home() {
       </div>
 
       {/* horizontal scroll section */}
+      <div className="w-full h-[500px] flex items-center justify-center">  
+hello
+      </div>
       <HorizontalScroll>
         <div className="flex gap-10">
           <div className="w-[400px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
+            <h2 className="text-white text-4xl font-bebas">Slide 1</h2>
+          </div>
+          <div className="w-[600px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
+            <h2 className="text-white text-4xl font-bebas">Slide 2</h2>
+          </div>
+          <div className="w-[400px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
+            <h2 className="text-white text-4xl font-bebas">Slide 3</h2>
+          </div>
+          <div className="w-[800px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
+            <h2 className="text-white text-4xl font-bebas">Slide 4</h2>
+          </div><div className="w-[400px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
             <h2 className="text-white text-4xl font-bebas">Slide 1</h2>
           </div>
           <div className="w-[600px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
@@ -142,9 +155,7 @@ export default function Home() {
         </div>
       </HorizontalScroll>
 
-      <div className="h-screen w-full flex items-center justify-center">
-        <h2 className="text-white text-6xl font-bebas">Footer Section</h2>
-      </div>
+      
     </div>
   );
 }
