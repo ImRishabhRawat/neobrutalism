@@ -1,4 +1,6 @@
 import ParallaxBox from "@/components/ParallaxBox";
+import { TextAnim } from "@/components/TextAnim";
+import TextReveal from "@/components/TextReveal";
 
 /**
  * Home Page
@@ -10,7 +12,17 @@ export default function Home() {
   return (
     <div className="bg-neutral-900 w-full min-h-screen px-4 py-6">
       {/* Hero Section */}
-      <div className="w-full h-screen">hello</div>
+      <div className="w-full h-screen flex items-center justify-center">
+        <h1 className="text-white text-8xl font-bebas">Scroll Down</h1>
+      </div>
+
+      <TextAnim/>
+
+      {/* <TextReveal
+        dotLabel="My Projects"
+        text="Showcasing My Work & Creations"
+        className="mt-10"
+      /> */}
 
       {/* Parallax Section - Responsive Grid */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-start justify-center">
@@ -23,6 +35,9 @@ export default function Home() {
           boxMovement={-222}
           imageMovement={200}
           imageStartY={-230}
+          title="Urbannest X"
+          subtitle="Room Booking Site @ 2024"
+          tags={["SEO Development", "Front-End", "Business"]}
           markers={false}
         />
 
@@ -34,6 +49,9 @@ export default function Home() {
           boxMovement={-40}
           imageMovement={100}
           imageStartY={-100}
+          title="Breezybae X"
+          subtitle="Hotel Booking Site @ 2024"
+          tags={["SEO Development", "Front-End", "Business"]}
           markers={false}
         />
       </div>
@@ -48,6 +66,9 @@ export default function Home() {
           boxMovement={-40}
           imageMovement={100}
           imageStartY={-100}
+          title="Luxury Stay"
+          subtitle="Resort Website @ 2023"
+          tags={["React", "GSAP", "Next.js"]}
           markers={false}
         />
       </div>

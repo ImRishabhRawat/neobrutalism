@@ -22,6 +22,12 @@ interface ParallaxBoxProps {
   imageMovement: number;
   /** Starting Y position for the image */
   imageStartY?: number;
+  /** Title of the project */
+  title?: string;
+  /** Subtitle or year of the project */
+  subtitle?: string;
+  /** Array of tags/badges */
+  tags?: string[];
   /** Show debug markers */
   markers?: boolean;
   /** Additional CSS classes for the container */
@@ -32,22 +38,8 @@ interface ParallaxBoxProps {
  * ParallaxBox Component
  *
  * A reusable component that creates a parallax effect with:
- * - Container that moves at one speed
+ * - Container (Image + Text) that moves at one speed
  * - Image inside that moves at a different speed (creates "window reveal" effect)
- * - Responsive: Disables box parallax on mobile, reduces image parallax intensity
- *
- * @example
- * ```tsx
- * <ParallaxBox
- *   imageSrc="/portfolio/project1/1.jpg"
- *   imageAlt="Project 1"
- *   width={400}
- *   height={500}
- *   boxMovement={-225}
- *   imageMovement={200}
- *   imageStartY={-230}
- * />
- * ```
  */
 export default function ParallaxBox({
   imageSrc,
@@ -57,51 +49,88 @@ export default function ParallaxBox({
   boxMovement,
   imageMovement,
   imageStartY = -200,
+  title,
+  subtitle,
+  tags = [],
   markers = false,
   className = "",
 }: ParallaxBoxProps) {
-  const boxRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
   // Detect mobile viewport
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1024px)");
 
-  // Apply parallax to the box container
-  // On mobile: disable box movement (0) for stable boxes
-  // On desktop: use full boxMovement value
-  useParallax(boxRef, {
+  // Apply parallax to the entire container (Box + Text)
+  useParallax(containerRef, {
     yMovement: isMobile ? 0 : boxMovement,
     startY: 0,
     markers,
   });
 
-  // Apply parallax to the inner image (opposite direction for window effect)
-  // On mobile: reduce intensity to 50% for subtle effect
-  // On desktop: use full imageMovement value
+  // Apply parallax to the inner image
   useParallax(imageRef, {
     yMovement: isMobile ? imageMovement * 0.5 : imageMovement,
     startY: isMobile ? imageStartY * 0.5 : imageStartY,
-    trigger: boxRef, // Use box as trigger
-    markers: false, // Don't show markers for inner animation
+    trigger: containerRef, // Triggered by the container
+    markers: false,
   });
 
   return (
     <div
-      ref={boxRef}
-      className={`bg-blue-300 rounded-2xl overflow-hidden relative flex items-center justify-center ${className}`}
+      ref={containerRef}
+      className={`flex flex-col group ${className}`}
       style={{
-        width: isMobile ? "100%" : `${width}px`,
-        height: isMobile ? "300px" : `${height}px`,
+        width: isMobile || isTablet ? "100%" : `${width}px`,
       }}
     >
-      <div ref={imageRef} className="absolute inset-0">
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          className="object-cover scale-130"
-        />
+      {/* Image Box */}
+      <div
+        className="bg-blue-300 rounded-3xl overflow-hidden relative flex items-center justify-center transition-transform duration-500 group-hover:scale-[1.01]"
+        style={{
+          width: "100%",
+          height: isMobile ? "300px" : `${height}px`,
+        }}
+      >
+        <div ref={imageRef} className="absolute inset-0">
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            className="object-cover scale-130"
+          />
+        </div>
       </div>
+
+      {/* Text Content Below */}
+      {(title || tags.length > 0) && (
+        <div className="mt-6 flex flex-col gap-3">
+          {/* Tags/Badges */}
+          {tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="px-4 py-1.5 bg-[#1A1A1A] text-white/60 text-[10px] uppercase tracking-widest rounded-full border border-white/10"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Title & Subtitle */}
+          <div className="flex flex-col">
+            {title && subtitle && (
+              <h3 className="text-white text-3xl font-bebas tracking-tighter uppercase leading-[1]">
+                {title} <br />
+                 {subtitle}
+              </h3>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
