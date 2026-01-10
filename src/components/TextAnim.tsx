@@ -18,7 +18,7 @@ export const TextAnim = () => {
           start: "top 90%",
           end: "bottom 60%",
           scrub: true,
-          markers: true,
+          markers: false,
         },
         })
         gsap.fromTo(box2Ref.current, {

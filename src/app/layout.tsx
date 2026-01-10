@@ -27,7 +27,9 @@ export default function RootLayout({
           antialiased bg-[#DCCFEC]
         `}
       >
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          {children}
+          </SmoothScroll>
       </body>
     </html>
   );
