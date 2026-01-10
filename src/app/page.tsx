@@ -1,81 +1,55 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import ParallaxBox from "@/components/ParallaxBox";
 
-
+/**
+ * Home Page
+ *
+ * Clean, simple page that uses reusable ParallaxBox components.
+ * Lenis smooth scroll is initialized globally in layout.tsx.
+ */
 export default function Home() {
   return (
-    <div className="flex max-w-7xl mx-auto items-center justify-center border-8 rounded-4xl border-blue-100 font-sans dark:bg-black px-4 py-6 ">
-      <div className="flex flex-col items-center justify-center overflow-hidden">
-        <div className="flex items-center justify-center">
-          <h1 className="text-8xl font-semibold font-bebas">STORYTELLER.IN.DA.HOUSE</h1>
-        </div>
-        <div className="flex items-center justify-center py-6">
-          <Button
-          className=""
-          >
-            GET STARTED
-          </Button>
+    <div className="bg-neutral-900 w-full min-h-screen px-4 py-6">
+      {/* Hero Section */}
+      <div className="w-full h-screen">hello</div>
 
+      {/* Parallax Section - Responsive Grid */}
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-start justify-center">
+        {/* Single column on mobile, 2 columns on desktop (768px+) */}
+        <ParallaxBox
+          imageSrc="/portfolio/project1/1.jpg"
+          imageAlt="Project 1"
+          width={400}
+          height={500}
+          boxMovement={-222}
+          imageMovement={200}
+          imageStartY={-230}
+          markers={false}
+        />
 
-        </div>
-          <Card className="w-full max-w-sm">
-  <CardHeader>
-    <CardTitle>Login to your account</CardTitle>
-    <CardDescription>
-      Enter your email below to login to your account
-    </CardDescription>
-  </CardHeader>
-  <CardContent>
-    <form>
-      <div className="flex flex-col gap-6">
-        <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="m@example.com"
-            required
-          />
-        </div>
-        <div className="grid gap-2">
-          <div className="flex items-center">
-            <Label htmlFor="password">Password</Label>
-            <a
-              href="#"
-              className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-            >
-              Forgot your password?
-            </a>
-          </div>
-          <Input id="password" type="password" required />
-        </div>
+        <ParallaxBox
+          imageSrc="/portfolio/project2/1.png"
+          imageAlt="Project 2"
+          width={550}
+          height={350}
+          boxMovement={-40}
+          imageMovement={100}
+          imageStartY={-100}
+          markers={false}
+        />
       </div>
-    </form>
-  </CardContent>
-  <CardFooter className="flex-col gap-2">
-    <Button type="submit" className="w-full">
-      Login
-    </Button>
-    <Button variant="neutral" className="w-full">
-      Login with Google
-    </Button>
-    <div className="mt-4 text-center text-sm">
-      Don&apos;t have an account?{" "}
-      <a href="#" className="underline underline-offset-4">
-        Sign up
-      </a>
-    </div>
-  </CardFooter>
-</Card>
+
+      {/* Spacer Section */}
+      <div className="w-full h-screen flex items-center justify-center">
+        <ParallaxBox
+          imageSrc="/portfolio/project3/1.png"
+          imageAlt="Project 3"
+          width={550}
+          height={350}
+          boxMovement={-40}
+          imageMovement={100}
+          imageStartY={-100}
+          markers={false}
+        />
       </div>
     </div>
   );

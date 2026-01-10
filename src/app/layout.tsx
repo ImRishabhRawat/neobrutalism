@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const bebas = Bebas_Neue({
   variable: "--font-bebas",
@@ -23,10 +24,10 @@ export default function RootLayout({
       <body
         className={`
           ${bebas.variable}
-          antialiased bg-[#DCCFEC] py-4
+          antialiased bg-[#DCCFEC]
         `}
       >
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
