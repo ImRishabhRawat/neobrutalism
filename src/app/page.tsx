@@ -15,8 +15,8 @@ export default function Home() {
     <div className="bg-neutral-900 w-full min-h-screen px-4 py-6">
       {/* Hero Section */}
       {/* <Hero/> */}
-<HomeView/>
-      <TextAnim />
+      <HomeView />
+      {/* <TextAnim /> */}
 
       {/* <TextReveal
         dotLabel="My Projects"
@@ -24,8 +24,8 @@ export default function Home() {
         className="mt-10"
       /> */}
 
-      {/* Parallax Section - Responsive Grid */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-start justify-center">
+      {/* Parallax Section - Responsive Flex */}
+      <div className="w-full flex flex-col md:flex-row gap-18 md:gap-64 items-start justify-center ">
         {/* Single column on mobile, 2 columns on desktop (768px+) */}
         <ParallaxBox
           imageSrc="/portfolio/project1/1.jpg"
@@ -57,12 +57,12 @@ export default function Home() {
       </div>
 
       {/* Spacer Section */}
-      <div className="w-full  flex items-center justify-center mb-50">
+      <div className="w-full  flex items-center justify-center my-16 mb-38">
         <ParallaxBox
           imageSrc="/portfolio/project3/1.png"
           imageAlt="Project 3"
-          width={550}
-          height={350}
+          width={850}
+          height={450}
           boxMovement={-40}
           imageMovement={100}
           imageStartY={-100}
@@ -73,30 +73,15 @@ export default function Home() {
         />
       </div>
 
-      {/* Parallax Section - Responsive Grid */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-start justify-center">
+      {/* Parallax Section - Responsive Flex */}
+      <div className="w-full flex flex-col-reverse md:flex-row-reverse gap-18 md:gap-64 items-end justify-center ">
         {/* Single column on mobile, 2 columns on desktop (768px+) */}
-
-        <ParallaxBox
-          imageSrc="/portfolio/project2/1.png"
-          imageAlt="Project 2"
-          width={550}
-          height={350}
-          boxMovement={-40}
-          imageMovement={100}
-          imageStartY={-100}
-          title="Breezybae X"
-          subtitle="Hotel Booking Site @ 2024"
-          tags={["SEO Development", "Front-End", "Business"]}
-          markers={false}
-        />
-
         <ParallaxBox
           imageSrc="/portfolio/project1/1.jpg"
           imageAlt="Project 1"
           width={400}
           height={500}
-          boxMovement={-222}
+          boxMovement={-40}
           imageMovement={200}
           imageStartY={-230}
           title="Urbannest X"
@@ -104,15 +89,29 @@ export default function Home() {
           tags={["SEO Development", "Front-End", "Business"]}
           markers={false}
         />
+
+        <ParallaxBox
+          imageSrc="/portfolio/project2/1.png"
+          imageAlt="Project 2"
+          width={550}
+          height={350}
+          boxMovement={-242}
+          imageMovement={100}
+          imageStartY={-100}
+          title="Breezybae X"
+          subtitle="Hotel Booking Site @ 2024"
+          tags={["SEO Development", "Front-End", "Business"]}
+          markers={false}
+        />
       </div>
 
       {/* Spacer Section */}
-      <div className="w-full  flex items-center justify-center mb-50">
+      <div className="w-full  flex items-center justify-center my-16 mb-38">
         <ParallaxBox
           imageSrc="/portfolio/project3/1.png"
           imageAlt="Project 3"
-          width={550}
-          height={350}
+          width={850}
+          height={450}
           boxMovement={-40}
           imageMovement={100}
           imageStartY={-100}
@@ -124,8 +123,8 @@ export default function Home() {
       </div>
 
       {/* horizontal scroll section */}
-      <div className="w-full h-[500px] flex items-center justify-center">  
-hello
+      <div className="w-full h-[500px] flex items-center justify-center">
+        hello
       </div>
       <HorizontalScroll>
         <div className="flex gap-10">
@@ -140,7 +139,8 @@ hello
           </div>
           <div className="w-[800px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
             <h2 className="text-white text-4xl font-bebas">Slide 4</h2>
-          </div><div className="w-[400px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
+          </div>
+          <div className="w-[400px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
             <h2 className="text-white text-4xl font-bebas">Slide 1</h2>
           </div>
           <div className="w-[600px] h-[500px] bg-neutral-800 rounded-3xl shrink-0 flex items-center justify-center border border-white/10">
@@ -154,8 +154,6 @@ hello
           </div>
         </div>
       </HorizontalScroll>
-
-      
     </div>
   );
 }

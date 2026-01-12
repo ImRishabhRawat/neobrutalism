@@ -12,7 +12,7 @@ const images = [
   "9.jpg", "10.jpg", "11.jpg", "12.jpg",
 ];
 
-export default function   HomeView() {
+export default function HomeView() {
   const gallery = useRef<HTMLDivElement>(null);
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
 
@@ -56,7 +56,7 @@ export default function   HomeView() {
   const y4 = useTransform(scrollYProgress, [0, 1], [0, height * 3]);
 
   return (
-    <main className="w-full bg-neutral-900">
+    <main className="hidden md:block w-full bg-neutral-900">
       {/* Spacer just to let you scroll a bit before reaching the gallery */}
       <div className="h-screen flex items-center justify-center">
         <h1 className="text-4xl font-bold text-white">Scroll Down</h1>
@@ -77,7 +77,7 @@ export default function   HomeView() {
         <Column images={[images[9], images[10], images[11]]} y={y4} top="-top-[75%]" />
       </div>
 
-      <div className="h-screen flex items-center justify-center">
+      <div className="h-[70vh] flex items-center justify-center">
         <h1 className="text-4xl font-bold text-black">Footer</h1>
       </div>
     </main>
