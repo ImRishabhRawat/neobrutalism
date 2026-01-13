@@ -5,60 +5,76 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
- * HorizontalScroll Logic:
- * 1. The 'trigger' section is the parent. We pin this so it stays fixed while we scroll.
- * 2. The 'slider' is the flex container that contains all the cards.
- * 3. We move the 'slider' to the left by its total scrollable width.
- * 4. GSAP maps the vertical scroll distance to the horizontal X translation.
+ * HorizontalScroll Logic (Fixed for smooth scrolling):
+ * 1. Separate the pin wrapper from the scroll container
+ * 2. Use center-center pinning for stability at start/end
+ * 3. Implement refresh function for accurate dimension calculations
+ * 4. Use scrub: true for direct scrollbar linking (no delay)
+ * 5. Add will-change CSS for GPU optimization
  */
 export default function HorizontalScroll({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const pin = sectionRef.current;
-    const trigger = triggerRef.current;
+    gsap.registerPlugin(ScrollTrigger);
 
-    if (!pin || !trigger) return;
+    const wrapper = wrapperRef.current;
+    const slider = sliderRef.current;
 
-    // Calculate how much to move: (Total Width of Slider - Window Width)
-    // Using Percent is easier: move it -(num_items - 1) * 100%
-    const totalWidth = pin.scrollWidth;
-    const windowWidth = window.innerWidth;
-    const amountToScroll = totalWidth - windowWidth;
+    if (!wrapper || !slider) return;
 
+    let scrollWidth: number;
+    let horizontalScrollLength: number;
+
+    // Refresh function to recalculate dimensions
+    function refresh() {
+      if (!slider) return;
+      scrollWidth = slider.scrollWidth;
+      horizontalScrollLength = scrollWidth - window.innerWidth;
+    }
+
+    // Initial calculation
+    refresh();
+
+    // Create the horizontal scroll animation
     const ctx = gsap.context(() => {
-      gsap.to(pin, {
-        x: -amountToScroll,
+      gsap.to(slider, {
+        x: () => -horizontalScrollLength,
         ease: "none",
         scrollTrigger: {
-          trigger: trigger,
-          pin: true,
-          scrub: 1,
-          start: "top 10%",
-          // The end determines the duration of the scroll
-          // We set it to the amount we scroll to keep speed 1:1
-          end: () => `+=${amountToScroll}`,
+          trigger: wrapper,
+          pin: wrapper, // Pin the wrapper, not the slider
+          scrub: true, // Direct link to scrollbar (no delay)
+          start: "center center", // More stable than "top 10%"
+          end: () => `+=${scrollWidth}`,
           invalidateOnRefresh: true,
         },
       });
     });
 
-    return () => ctx.revert();
+    // Listen for refresh events
+    ScrollTrigger.addEventListener("refreshInit", refresh);
+
+    return () => {
+      ctx.revert();
+      ScrollTrigger.removeEventListener("refreshInit", refresh);
+    };
   }, []);
 
   return (
     <section
-      ref={triggerRef}
+      ref={wrapperRef}
       className="relative overflow-hidden bg-neutral-900"
     >
       <div
-        ref={sectionRef}
+        ref={sliderRef}
         className="flex h-screen w-max items-center px-[5vw]"
+        style={{ willChange: "transform" }}
       >
         {children}
       </div>
